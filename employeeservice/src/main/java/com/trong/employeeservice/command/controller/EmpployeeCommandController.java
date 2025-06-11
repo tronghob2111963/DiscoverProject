@@ -2,20 +2,19 @@ package com.trong.employeeservice.command.controller;
 
 
 import com.trong.employeeservice.command.command.CreateEmployeeCommand;
+import com.trong.employeeservice.command.command.UpdateEmployeeCommand;
 import com.trong.employeeservice.command.model.CreateEmployeeModel;
+import com.trong.employeeservice.command.model.UpdateEmployeeModel;
 import jakarta.validation.Valid;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/employees")
-public class CreateEmployeeController {
+public class EmpployeeCommandController {
 
     @Autowired
     private CommandGateway commandGateway;
@@ -30,5 +29,12 @@ public class CreateEmployeeController {
         );
         return commandGateway.sendAndWait(command);
     }
+
+    @PutMapping("/{employeeId}")
+    public String updateEmployee(@Valid @RequestBody UpdateEmployeeModel model, @PathVariable String employeeId){
+        UpdateEmployeeCommand command = new UpdateEmployeeCommand(employeeId,model.getFirstName(),model.getLastName(),model.getKin(),model.getIsDisciplined());
+        return commandGateway.sendAndWait(command);
+    }
+
 
 }

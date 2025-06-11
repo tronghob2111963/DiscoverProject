@@ -1,8 +1,6 @@
 package com.trong.bookservice.command.controller;
 
-
 import com.trong.bookservice.command.command.CreateBookCommand;
-<<<<<<< HEAD
 import com.trong.bookservice.command.command.DeleteBookCommand;
 import com.trong.bookservice.command.command.UpdateBookCommand;
 import com.trong.bookservice.command.model.BookRequestModel;
@@ -10,15 +8,6 @@ import jakarta.validation.Valid;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-=======
-import com.trong.bookservice.command.model.BookRequestModel;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
->>>>>>> 3ac60f58ee77c519e2afa7ad3ecf50f14e218cd3
 
 import java.util.UUID;
 
@@ -27,7 +16,6 @@ import java.util.UUID;
 public class BookCommandController {
 
     @Autowired
-<<<<<<< HEAD
     private CommandGateway commandGateway;
 
     @PostMapping
@@ -47,22 +35,12 @@ public class BookCommandController {
         DeleteBookCommand command = new DeleteBookCommand(bookId);
         return commandGateway.sendAndWait(command);
     }
-=======
-    private CommandGateway commandGateway; //phát đi những event
-
-    @PostMapping
-    public String addBook(@RequestBody BookRequestModel request){
-        CreateBookCommand command = new CreateBookCommand(
-                UUID.randomUUID().toString(),
-                request.getName(),
-                request.getAuthor(),
-                true    //đang đọc
-        );
-        return  commandGateway.sendAndWait(command); //phát đi những event
-    }
 
 
->>>>>>> 3ac60f58ee77c519e2afa7ad3ecf50f14e218cd3
+
+
+
+
 
 
 }
