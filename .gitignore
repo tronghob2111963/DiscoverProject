@@ -1,0 +1,4 @@
+Software/AxonServer-2024.0.4/axonserver-migration.jar
+Software/AxonServer-2024.0.4/axonserver.jar
+Software/AxonServer-2024.0.4/data/default/*.snapshots
+Software/AxonServer-2024.0.4/data/default/*.events
