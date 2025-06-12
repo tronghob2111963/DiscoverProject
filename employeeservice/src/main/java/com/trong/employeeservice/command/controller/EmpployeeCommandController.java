@@ -2,6 +2,7 @@ package com.trong.employeeservice.command.controller;
 
 
 import com.trong.employeeservice.command.command.CreateEmployeeCommand;
+import com.trong.employeeservice.command.command.DeletedEmployeeCommand;
 import com.trong.employeeservice.command.command.UpdateEmployeeCommand;
 import com.trong.employeeservice.command.model.CreateEmployeeModel;
 import com.trong.employeeservice.command.model.UpdateEmployeeModel;
@@ -33,6 +34,12 @@ public class EmpployeeCommandController {
     @PutMapping("/{employeeId}")
     public String updateEmployee(@Valid @RequestBody UpdateEmployeeModel model, @PathVariable String employeeId){
         UpdateEmployeeCommand command = new UpdateEmployeeCommand(employeeId,model.getFirstName(),model.getLastName(),model.getKin(),model.getIsDisciplined());
+        return commandGateway.sendAndWait(command);
+    }
+
+    @DeleteMapping("/{employeeId}")
+    public String deleteEmployee(@PathVariable String employeeId){
+        DeletedEmployeeCommand command = new DeletedEmployeeCommand(employeeId);
         return commandGateway.sendAndWait(command);
     }
 
