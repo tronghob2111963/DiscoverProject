@@ -18,8 +18,9 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="notificaitonservice" />
+        <module name="borrowingservice" />
         <module name="employeeservice" />
+        <module name="notificaitonservice" />
         <module name="bookservice" />
       </profile>
     </annotationProcessing>
@@ -28,6 +29,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="apigateway" options="-parameters" />
       <module name="bookservice" options="-parameters" />
+      <module name="borrowingservice" options="-parameters" />
       <module name="commonservice" options="-parameters" />
       <module name="discoverserver" options="-parameters" />
       <module name="employeeservice" options="-parameters" />

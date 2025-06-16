@@ -3,7 +3,8 @@ package com.trong.bookservice.query.controller;
 
 import com.trong.bookservice.query.model.BookResponseModel;
 import com.trong.bookservice.query.queries.GetAllBookeQuerry;
-import com.trong.bookservice.query.queries.GetBookDetailQuerry;
+import com.trong.commonservice.model.BookResponseCommonModel;
+import com.trong.commonservice.querries.GetBookDetailQuery;
 import com.trong.commonservice.services.KafkaService;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -32,10 +33,10 @@ public class BookQuerryController {
     }
 
     @GetMapping("/{bookId}")
-    public BookResponseModel getBookDetail(@PathVariable String bookId) {
-        GetBookDetailQuerry query = new GetBookDetailQuerry(bookId);
+    public BookResponseCommonModel getBookDetail(@PathVariable String bookId) {
+        GetBookDetailQuery query = new GetBookDetailQuery(bookId);
         return queryGateway
-                .query(query, ResponseTypes.instanceOf(BookResponseModel.class))
+                .query(query, ResponseTypes.instanceOf(BookResponseCommonModel.class))
                 .join();
 
     }

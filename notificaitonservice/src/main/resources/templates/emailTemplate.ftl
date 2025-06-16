@@ -876,7 +876,7 @@
                                   <tbody>
                                     <tr>
                                       <td align="center" class="esd-block-text es-p10t es-p5b">
-                                        <h2 style="color: #00413f;">Happy, ${name}</h2>
+                                        <h2 style="color: #00413f;">Good Evening, ${name}</h2>
                                       </td>
                                     </tr>
                                     <tr>

@@ -3,6 +3,8 @@ package com.trong.bookservice.command.event;
 
 import com.trong.bookservice.command.data.Book;
 import com.trong.bookservice.command.data.BookRepository;
+import com.trong.commonservice.event.BookRollBackStatusEvent;
+import com.trong.commonservice.event.BookUpdateStatusEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +28,37 @@ public class BookEventsHandler {
 
     @EventHandler
     public void on(BookUpdatedEvent event){
-        Optional<Book> oldbook = bookRepository.findById(event.getId());
-        oldbook.ifPresent(book -> {
-           book.setName(event.getName());
-           book.setAuthor(event.getAuthor());
-           book.setIsReady(event.getIsReady());
+        Optional<Book> oldBook = bookRepository.findById(event.getId());
+        oldBook.ifPresent(book -> {
+            book.setName(event.getName());
+            book.setAuthor(event.getAuthor());
+            book.setIsReady(event.getIsReady());
+            bookRepository.save(book);
+        });
 
-           bookRepository.save(oldbook.get());
-       });
+    }
+
+    @EventHandler
+    public void on(BookUpdateStatusEvent event){
+        Optional<Book> oldBook = bookRepository.findById(event.getBookId());
+        oldBook.ifPresent(book -> {
+            book.setIsReady(event.getIsReady());
+            bookRepository.save(book);
+        });
     }
 
     @EventHandler
     public void on(BookDeletedEvent event){
-        Optional<Book> oldbook = bookRepository.findById(event.getId());
-        //kiem tra book co ton tai hay khong
-        // neu ton tai thi xoa
-        oldbook.ifPresent(book -> bookRepository.delete(book));
+        Optional<Book> oldBook = bookRepository.findById(event.getId());
+        oldBook.ifPresent(book -> bookRepository.delete((book)));
+    }
+
+    @EventHandler
+    public void on(BookRollBackStatusEvent event){
+        Optional<Book> oldBook = bookRepository.findById(event.getBookId());
+        oldBook.ifPresent(book -> {
+            book.setIsReady(event.getIsReady());
+            bookRepository.save(book);
+        });
     }
 }

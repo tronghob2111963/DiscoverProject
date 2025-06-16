@@ -1,4 +1,4 @@
-package com.trong.bookservice.query.queries;
+package com.trong.commonservice.querries;
 
 
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetBookDetailQuerry {
+public class GetBookDetailQuery {
     private String id;
 
 }

@@ -1,9 +1,10 @@
 package com.trong.employeeservice.query.controller;
 
 
+import com.trong.commonservice.model.EmployeeResponseCommonModel;
 import com.trong.employeeservice.query.model.EmployeeResponseModel;
 import com.trong.employeeservice.query.querries.GetAllEmployeeQuery;
-import com.trong.employeeservice.query.querries.GetDetaiEmployeelQuerry;
+import com.trong.commonservice.querries.GetDetailEmployeeQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -96,10 +97,10 @@ public class EmployeeQueryController {
 
             }
     )
-    public EmployeeResponseModel getEmployeeDetail(@PathVariable String employeeId) {
-        EmployeeResponseModel result =  queryGateway.query(
-                new GetDetaiEmployeelQuerry(employeeId),
-                ResponseTypes.instanceOf(EmployeeResponseModel.class))
+    public EmployeeResponseCommonModel getEmployeeDetail(@PathVariable String employeeId) {
+        EmployeeResponseCommonModel result =  queryGateway.query(
+                new GetDetailEmployeeQuery(employeeId),
+                ResponseTypes.instanceOf(EmployeeResponseCommonModel.class))
                 .join();
         return result;
     }

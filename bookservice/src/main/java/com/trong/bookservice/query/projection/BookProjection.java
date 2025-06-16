@@ -5,7 +5,8 @@ import com.trong.bookservice.command.data.Book;
 import com.trong.bookservice.command.data.BookRepository;
 import com.trong.bookservice.query.model.BookResponseModel;
 import com.trong.bookservice.query.queries.GetAllBookeQuerry;
-import com.trong.bookservice.query.queries.GetBookDetailQuerry;
+import com.trong.commonservice.model.BookResponseCommonModel;
+import com.trong.commonservice.querries.GetBookDetailQuery;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class BookProjection {
     }
 
     @QueryHandler
-    public BookResponseModel getBookDetail(GetBookDetailQuerry query) throws Exception {
-        BookResponseModel bookResponsemodel = new BookResponseModel();
+    public BookResponseCommonModel getBookDetail(GetBookDetailQuery query) throws Exception {
+        BookResponseCommonModel bookResponsemodel = new BookResponseCommonModel();
         Book book = bookRepository.findById(query.getId()).orElseThrow(() -> new Exception("Book not found"));
         BeanUtils.copyProperties(book,bookResponsemodel);
         return bookResponsemodel;

@@ -1,4 +1,4 @@
-package com.trong.employeeservice.query.querries;
+package com.trong.borrowingservice.command.event;
 
 
 import lombok.AllArgsConstructor;
@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetDetaiEmployeelQuerry {
-    private String id;
+public class BorrowingDeletedEvent {
+
+    String id;
+
+
 }
