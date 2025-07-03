@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discoveyryserver
+  labels:
+    app: discoveyryserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: discoveyryserver
+  template:
+    metadata:
+      labels:
+        app: discoveyryserver
+    spec:
+      containers:
+        - name: discoveyryserver
+          image: discoverproject-discoveryserver:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8761
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway
+  labels:
+    app: apigateway
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apigateway
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+        - name: discoveyryserver
+          image: discoverproject-discoveryserver:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: discoveyryserver
+spec:
+  selector:
+    app: discoveyryserver
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigateway
+spec:
+  selector:
+    app: apigateway
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
